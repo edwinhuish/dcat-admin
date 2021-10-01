@@ -29,7 +29,7 @@
 
                     if (valueField) {
                         return $.map(data, function (dat) {
-                            return {value: Dcat.helpers.get(dat, valueField), data: dat};
+                            return {value: Dcat.helpers.get(dat, valueField), data: data};
                         });
                     }
 
@@ -55,23 +55,14 @@
 
             var p = {};
 
-            for (var field of fields) {
-                for (var data of formData) {
-                    if (!data.value.length){
-                        continue;
-                    }
+            for (var data of formData) {
+                for (var field of fields) {
                     if (data.name === field) {
+                        if (data.value !== false && !data.value) {
+                            return false;
+                        }
                         p[field] = data.value
                     }
-                    if (data.name === field + '[]') {
-                        if(!Array.isArray(p[field])){
-                            p[field] = []
-                        }
-                        p[field].push(data.value);
-                    }
-                }
-                if (!p.hasOwnProperty(field)){
-                    return false;
                 }
             }
 
@@ -81,16 +72,11 @@
 
     @if($depends['clear'])
     $.map(fields, function (field) {
-        var _selectors = [
-            '[name="' + field + '"]',
-            '[name="' + field + '[]"]'
-        ];
-        $.map(_selectors, function(_selector){
-            $this.closest('form').off('change.depends', _selector)
-                .on('change.depends', _selector, function () {
-                    $this.val('');
-                });
-        })
+        var _selector = '[name="' + field + '"]';
+        $this.closest('form').off('change.depends', _selector)
+            .on('change.depends', _selector, function () {
+                $this.val('');
+            });
     });
     @endif
 

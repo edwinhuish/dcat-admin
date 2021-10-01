@@ -124,10 +124,6 @@ class Autocomplete extends Text
             'configs' => JavaScript::format($this->configs),
         ]);
 
-        $this->configs([
-            'groupBy' => $this->groupBy,
-        ]);
-
         return parent::render();
     }
 
