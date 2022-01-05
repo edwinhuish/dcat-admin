@@ -404,7 +404,7 @@ class IdeHelperCommand extends Command
             $endLine = $reflectedMethod->getEndLine();
             $length = $endLine - $startLine;
 
-            $source = implode("", array_slice(file($file), $startLine, $length));
+            $source = implode('', array_slice(file($file), $startLine, $length));
 
             $source = substr($source, 0, strpos($source, ')')); // 截取第一个右括号之前的所有内容（不包含）
             $source = substr($source, strpos($source, '(') + 1);  // 截取第一个左括号之前的所有内容（不包含）
