@@ -181,7 +181,6 @@ class Application
      */
     protected function setAppConfigs(string $app, array $value)
     {
-
         config([$app => $value]);
 
         $this->configs[$app] = $value;
