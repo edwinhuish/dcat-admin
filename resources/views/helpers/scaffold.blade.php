@@ -13,7 +13,7 @@
         'controller' => (trans('admin.scaffold.create_controller')),
         'migrate' => (trans('admin.scaffold.run_migrate')),
         'lang' => (trans('admin.scaffold.create_lang')),
-    ])->checkAll(['migrate', 'migration']);
+    ])->checkAll(['migrate', 'repository']);
 @endphp
 <style>
     .select2-container .select2-selection--single {
